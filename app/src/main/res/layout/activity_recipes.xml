@@ -13,12 +13,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/roboto"
-        android:text="Ready Recipes That Match Your Ingredient:  "
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
