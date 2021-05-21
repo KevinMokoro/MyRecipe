@@ -2,10 +2,14 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/acme</item>
+        <item>@font/anton</item>
         <item>@font/candal</item>
         <item>@font/days_one</item>
         <item>@font/gravitas_one</item>
         <item>@font/lemon</item>
+        <item>@font/luckiest_guy</item>
         <item>@font/roboto</item>
+        <item>@font/unlock</item>
     </array>
 </resources>

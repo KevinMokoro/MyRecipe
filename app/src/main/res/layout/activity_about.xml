@@ -4,9 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AboutActivity">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/about" />
+
     <TextView
+        android:id="@+id/aboutTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,6 +28,33 @@
         android:textColor="@color/primary_dark"
         android:textSize="34sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutTextView"
+        android:layout_marginTop="40dp"
+        android:background="@color/white"
+        android:fontFamily="monospace"
+        android:includeFontPadding="true"
+        android:text="COOK THINKING..?"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/textViewParagraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="172dp"
+        android:background="@color/primary_dark"
+        android:padding="21dp"
+        android:text="You think you can't cook with left Groceries? Let us change your capability! Enter any ingredients,and we'll show you recipes you could make. SIMPLE! START NOW!!"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="normal|bold" />
 
 
 </RelativeLayout>
