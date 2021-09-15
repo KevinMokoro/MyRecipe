@@ -1,4 +1,4 @@
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.network;
 
 import java.io.IOException;
 

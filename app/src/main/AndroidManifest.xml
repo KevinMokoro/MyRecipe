@@ -12,18 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRecipe">
-        <activity android:name=".AboutActivity">
+        <activity android:name=".ui.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.myrecipe.MainActivity"></meta-data>
+                android:value="com.moringaschool.myrecipe.ui.MainActivity"></meta-data>
         </activity>
-        <activity android:name=".RecipesActivity">
+        <activity android:name=".ui.RecipesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.myrecipe.MainActivity"></meta-data>
+                android:value="com.moringaschool.myrecipe.ui.MainActivity"></meta-data>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/Theme.NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

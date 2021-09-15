@@ -1,8 +1,10 @@
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.ui;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.moringaschool.myrecipe.R;
 
 public class AboutActivity extends AppCompatActivity {
 

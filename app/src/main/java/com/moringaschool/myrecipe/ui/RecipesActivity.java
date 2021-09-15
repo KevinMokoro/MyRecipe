@@ -1,4 +1,4 @@
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.moringaschool.myrecipe.MyRecipesAdapter;
+import com.moringaschool.myrecipe.R;
+import com.moringaschool.myrecipe.network.SpoonacularApi;
+import com.moringaschool.myrecipe.network.SpoonacularClient;
 import com.moringaschool.myrecipe.models.SpoonacularRecipeSearchResponse;
 import com.moringaschool.myrecipe.models.UsedIngredient;
 
