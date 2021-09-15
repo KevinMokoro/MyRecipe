@@ -9,13 +9,14 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.moringaschool.myrecipe.Constants.EDAMAM_API_KEY;
-import static com.moringaschool.myrecipe.Constants.EDAMAM_BASE_URL;
+import static com.moringaschool.myrecipe.Constants.SPOONACULAR_API_KEY;
+import static com.moringaschool.myrecipe.Constants.SPOONACULAR_BASE_URL;
 
-public class EdamamClient {
+public class SpoonacularClient {
+
     private static Retrofit retrofit = null;
 
-    public static EdamamApi getClient() {
+    public static SpoonacularApi getClient() {
 
         if (retrofit == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -23,7 +24,7 @@ public class EdamamClient {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Request newRequest  = chain.request().newBuilder()
-                                    .addHeader("Authorization", EDAMAM_API_KEY)
+                                    .addHeader("Authorization", SPOONACULAR_API_KEY)
                                     .build();
                             return chain.proceed(newRequest);
                         }
@@ -31,12 +32,13 @@ public class EdamamClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(EDAMAM_BASE_URL)
+                    .baseUrl(SPOONACULAR_BASE_URL)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
 
-        return retrofit.create(EdamamApi.class);
+        return retrofit.create(SpoonacularApi.class);
     }
+
 }
