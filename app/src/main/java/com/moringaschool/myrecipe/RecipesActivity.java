@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.moringaschool.myrecipe.models.SpoonacularRecipeSearchResponse;
+import com.moringaschool.myrecipe.models.UsedIngredient;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,6 +25,7 @@ import retrofit2.Response;
 public class RecipesActivity extends AppCompatActivity {
     @BindView(R.id.ingredientTextView) TextView mIngredientTextView;
     @BindView(R.id.listViewRecipes) ListView mListViewRecipes;
+    private Object SpoonacularRecipeSearchResponse;
 
     //public List<Ingredient> recipes;
 
@@ -51,37 +55,50 @@ public class RecipesActivity extends AppCompatActivity {
         String ingredient = intent.getStringExtra("ingredient");
         mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
 
-        EdamamApi client = EdamamClient.getClient();
-        Call<EdamamRecipeSearchResponse> call = client.getRecipes(ingredient, "recipes");
+        SpoonacularApi client = SpoonacularClient.getClient();
+        Call<SpoonacularRecipeSearchResponse> call = client.getRecipes(ingredient);
 
-        call.enqueue(new Callback<EdamamRecipeSearchResponse>() {
+        call.enqueue(new Callback<SpoonacularRecipeSearchResponse>() {
+
+
 
 
             @Override
-            public void onResponse(Call<EdamamRecipeSearchResponse> call, Response<EdamamRecipeSearchResponse> response) {
+            public void onResponse(Call<SpoonacularRecipeSearchResponse> call, Response<SpoonacularRecipeSearchResponse> response) {
                 if(response.isSuccessful()) {
-                    List<Hit> recipeList = response.body().getHits();
-                    String[] recipes = new String[recipeList.size()];
-                    String[] cuisines = new String[recipeList.size()];
 
-                    for (int i = 0; i < recipes.length; i++){
-                        recipes[i] = recipeList.get(i).getRecipe().getLabel();
+                    List<UsedIngredient> recipeList = response.body().getUsedIngredients();
+                    String[] recipe = new String[recipeList.size()];
+                    String[] source = new String[recipeList.size()];
+
+                    for (int i = 0; i < recipe.length; i++){
+                        recipe[i] = recipeList.get(i).getOriginalName();
                     }
-                    for (int i = 0; i < cuisines.length; i++) {
-                        cuisines[i] = recipeList.get(i).getRecipe().getCuisineType().get(0);
+                    for (int i = 0; i < source.length; i++) {
+                    String title = new SpoonacularRecipeSearchResponse().getTitle();
+                    source[i] = title;
+
                     }
+                        // for (int i = 0; i < source.length; i++ ) {
+                    //    SpoonacularRecipeSearchResponse title = new SpoonacularRecipeSearchResponse();
+                      //  String sources = title.getTitle();
+                    //    source[i] = recipeList.get(i).
+                    //}
 
-                    ArrayAdapter adapter = new MyRecipesAdapter(RecipesActivity.this, android.R.layout.simple_list_item_1, recipes, cuisines);
-                    mListViewRecipes.setAdapter(adapter);
 
 
 
+                        ArrayAdapter adapter = new MyRecipesAdapter(RecipesActivity.this, android.R.layout.simple_list_item_1, recipe, source);
+                        mListViewRecipes.setAdapter(adapter);
+
+
+                    }
                 }
 
-            }
+
 
             @Override
-            public void onFailure(Call<EdamamRecipeSearchResponse> call, Throwable t) {
+            public void onFailure(Call<SpoonacularRecipeSearchResponse> call, Throwable t) {
 
             }
         });

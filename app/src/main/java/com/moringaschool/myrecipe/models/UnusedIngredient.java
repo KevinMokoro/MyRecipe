@@ -1,5 +1,5 @@
 
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 
-public class UsedIngredient {
+public class UnusedIngredient {
 
     @SerializedName("aisle")
     @Expose
@@ -47,7 +47,7 @@ public class UsedIngredient {
      * No args constructor for use in serialization
      * 
      */
-    public UsedIngredient() {
+    public UnusedIngredient() {
     }
 
     /**
@@ -64,7 +64,7 @@ public class UsedIngredient {
      * @param id
      * @param aisle
      */
-    public UsedIngredient(String aisle, Double amount, Integer id, String image, List<Object> meta, String name, String original, String originalName, String unit, String unitLong, String unitShort) {
+    public UnusedIngredient(String aisle, Double amount, Integer id, String image, List<Object> meta, String name, String original, String originalName, String unit, String unitLong, String unitShort) {
         super();
         this.aisle = aisle;
         this.amount = amount;

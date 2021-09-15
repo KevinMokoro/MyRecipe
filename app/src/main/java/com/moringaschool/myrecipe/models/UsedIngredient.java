@@ -1,5 +1,5 @@
 
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 
-public class MissedIngredient {
+public class UsedIngredient {
 
     @SerializedName("aisle")
     @Expose
@@ -23,7 +23,7 @@ public class MissedIngredient {
     private String image;
     @SerializedName("meta")
     @Expose
-    private List<String> meta = null;
+    private List<Object> meta = null;
     @SerializedName("name")
     @Expose
     private String name;
@@ -42,15 +42,12 @@ public class MissedIngredient {
     @SerializedName("unitShort")
     @Expose
     private String unitShort;
-    @SerializedName("extendedName")
-    @Expose
-    private String extendedName;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public MissedIngredient() {
+    public UsedIngredient() {
     }
 
     /**
@@ -61,14 +58,13 @@ public class MissedIngredient {
      * @param unit
      * @param original
      * @param unitShort
-     * @param extendedName
      * @param meta
      * @param name
      * @param unitLong
      * @param id
      * @param aisle
      */
-    public MissedIngredient(String aisle, Double amount, Integer id, String image, List<String> meta, String name, String original, String originalName, String unit, String unitLong, String unitShort, String extendedName) {
+    public UsedIngredient(String aisle, Double amount, Integer id, String image, List<Object> meta, String name, String original, String originalName, String unit, String unitLong, String unitShort) {
         super();
         this.aisle = aisle;
         this.amount = amount;
@@ -81,7 +77,6 @@ public class MissedIngredient {
         this.unit = unit;
         this.unitLong = unitLong;
         this.unitShort = unitShort;
-        this.extendedName = extendedName;
     }
 
     public String getAisle() {
@@ -116,11 +111,11 @@ public class MissedIngredient {
         this.image = image;
     }
 
-    public List<String> getMeta() {
+    public List<Object> getMeta() {
         return meta;
     }
 
-    public void setMeta(List<String> meta) {
+    public void setMeta(List<Object> meta) {
         this.meta = meta;
     }
 
@@ -170,14 +165,6 @@ public class MissedIngredient {
 
     public void setUnitShort(String unitShort) {
         this.unitShort = unitShort;
-    }
-
-    public String getExtendedName() {
-        return extendedName;
-    }
-
-    public void setExtendedName(String extendedName) {
-        this.extendedName = extendedName;
     }
 
 }

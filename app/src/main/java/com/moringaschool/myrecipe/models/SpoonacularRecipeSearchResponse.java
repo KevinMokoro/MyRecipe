@@ -1,5 +1,5 @@
 
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -29,7 +29,7 @@ public class SpoonacularRecipeSearchResponse {
     private List<MissedIngredient> missedIngredients = null;
     @SerializedName("title")
     @Expose
-    private String title;
+    private static String title;
     @SerializedName("unusedIngredients")
     @Expose
     private List<UnusedIngredient> unusedIngredients = null;
@@ -122,7 +122,7 @@ public class SpoonacularRecipeSearchResponse {
         this.missedIngredients = missedIngredients;
     }
 
-    public String getTitle() {
+    public static String getTitle() {
         return title;
     }
 
