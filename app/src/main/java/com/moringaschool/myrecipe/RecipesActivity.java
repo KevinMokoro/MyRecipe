@@ -2,10 +2,12 @@ package com.moringaschool.myrecipe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +27,10 @@ import retrofit2.Response;
 public class RecipesActivity extends AppCompatActivity {
     @BindView(R.id.ingredientTextView) TextView mIngredientTextView;
     @BindView(R.id.listViewRecipes) ListView mListViewRecipes;
-    private Object SpoonacularRecipeSearchResponse;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+
+  //  private Object SpoonacularRecipeSearchResponse;
 
     //public List<Ingredient> recipes;
 
@@ -34,6 +39,26 @@ public class RecipesActivity extends AppCompatActivity {
     //        "chickenMasala","viazi karai","uji","brown rice","mushroom","soup","yum","rum","choma","githeri"};
    // String[] sources = new String[] { "Kevin Cafe", "Chef Kevin", "Taita Cafe", "BIG", "Elna", "Naden", "AIden", "Just",
    // "KIki", "Jackiana", "Wakesho", "Suswa", "Box", "JUliet Towers", "Sixtus"};
+  private void showFailureMessage() {
+      mErrorTextView.setText("Something went wrong. Please check your internet connection and try again." );
+      mErrorTextView.setVisibility(View.VISIBLE);
+  }
+
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Something went wrong. Try agin later.");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showRecipes() {
+   //     mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressbar() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +92,8 @@ public class RecipesActivity extends AppCompatActivity {
             public void onResponse(Call<SpoonacularRecipeSearchResponse> call, Response<SpoonacularRecipeSearchResponse> response) {
                 if(response.isSuccessful()) {
 
+                    hideProgressbar();
+
                     List<UsedIngredient> recipeList = response.body().getUsedIngredients();
                     String[] recipe = new String[recipeList.size()];
                     String[] source = new String[recipeList.size()];
@@ -90,16 +117,19 @@ public class RecipesActivity extends AppCompatActivity {
 
                         ArrayAdapter adapter = new MyRecipesAdapter(RecipesActivity.this, android.R.layout.simple_list_item_1, recipe, source);
                         mListViewRecipes.setAdapter(adapter);
-
-
-                    }
+                    showRecipes();
+                } else {
+                    showUnsuccessfulMessage();
                 }
 
 
+            }
 
             @Override
             public void onFailure(Call<SpoonacularRecipeSearchResponse> call, Throwable t) {
-
+                Log.e("Error Message", "onFailure: ",t );
+                hideProgressbar();
+                showFailureMessage();
             }
         });
 
