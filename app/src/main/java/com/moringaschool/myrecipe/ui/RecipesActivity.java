@@ -4,21 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.myrecipe.MyRecipesAdapter;
 import com.moringaschool.myrecipe.R;
-import com.moringaschool.myrecipe.network.SpoonacularApi;
-import com.moringaschool.myrecipe.network.SpoonacularClient;
+import com.moringaschool.myrecipe.adapters.RecipeListAdapter;
 import com.moringaschool.myrecipe.models.SpoonacularRecipeSearchResponse;
 import com.moringaschool.myrecipe.models.UsedIngredient;
+import com.moringaschool.myrecipe.network.SpoonacularApi;
+import com.moringaschool.myrecipe.network.SpoonacularClient;
 
 import java.util.List;
 
@@ -29,10 +29,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecipesActivity extends AppCompatActivity {
-    @BindView(R.id.ingredientTextView) TextView mIngredientTextView;
-    @BindView(R.id.listViewRecipes) ListView mListViewRecipes;
+    //@BindView(R.id.ingredientTextView) TextView mIngredientTextView;
+  //  @BindView(R.id.listViewRecipes) ListView mListViewRecipes;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+
+    private RecipeListAdapter mAdapter;
+
 
   //  private Object SpoonacularRecipeSearchResponse;
 
@@ -73,16 +77,16 @@ public class RecipesActivity extends AppCompatActivity {
     //    MyRecipesAdapter adapter = new MyRecipesAdapter(this, android.R.layout.simple_list_item_1, recipes, sources);
      //   mListViewRecipes.setAdapter(adapter);
 
-        mListViewRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?>parent, View view, int position, long l) {
-                String recipe = ((TextView)view).getText().toString();
-                Toast.makeText(RecipesActivity.this, recipe, Toast.LENGTH_LONG).show();
-            }
-        });
+   //     mListViewRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+     //       @Override
+     //       public void onItemClick(AdapterView<?>parent, View view, int position, long l) {
+      //          String recipe = ((TextView)view).getText().toString();
+       //         Toast.makeText(RecipesActivity.this, recipe, Toast.LENGTH_LONG).show();
+       //     }
+      //  });
         Intent intent = getIntent();
         String ingredient = intent.getStringExtra("ingredient");
-        mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
+   //     mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
 
         SpoonacularApi client = SpoonacularClient.getClient();
         Call<SpoonacularRecipeSearchResponse> call = client.getRecipes(ingredient);
@@ -94,9 +98,10 @@ public class RecipesActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<SpoonacularRecipeSearchResponse> call, Response<SpoonacularRecipeSearchResponse> response) {
+
+                hideProgressbar();
                 if(response.isSuccessful()) {
 
-                    hideProgressbar();
 
                     List<UsedIngredient> recipeList = response.body().getUsedIngredients();
                     String[] recipe = new String[recipeList.size()];
@@ -115,12 +120,19 @@ public class RecipesActivity extends AppCompatActivity {
                       //  String sources = title.getTitle();
                     //    source[i] = recipeList.get(i).
                     //}
+                    recipeList= response.body().getUsedIngredients();
+                    mAdapter = new RecipeListAdapter(RecipesActivity.this, recipeList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RecipesActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasFixedSize(true);
 
 
 
 
-                        ArrayAdapter adapter = new MyRecipesAdapter(RecipesActivity.this, android.R.layout.simple_list_item_1, recipe, source);
-                        mListViewRecipes.setAdapter(adapter);
+
+                    ArrayAdapter adapter = new MyRecipesAdapter(RecipesActivity.this, android.R.layout.simple_list_item_1, recipe, source);
+                //        mListViewRecipes.setAdapter(adapter);
                     showRecipes();
                 } else {
                     showUnsuccessfulMessage();
