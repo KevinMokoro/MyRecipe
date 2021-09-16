@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.moringaschool.myrecipe.R;
 import com.moringaschool.myrecipe.models.SpoonacularRecipeSearchResponse;
 import com.moringaschool.myrecipe.models.UsedIngredient;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -59,6 +60,8 @@ public class RecipeListAdapter  extends RecyclerView.Adapter<RecipeListAdapter.R
         }
 
         public void bindRecipe(UsedIngredient recipe) {
+
+            Picasso.get().load(recipe.getImageUrl()).into(mRecipeImageView);
             mNameTextView.setText(recipe.getOriginalName());
             mSourceTextView.setText(recipe.getId());
             mLikesTextView.setText(SpoonacularRecipeSearchResponse.getTitle().getLikes() + "Likes");
