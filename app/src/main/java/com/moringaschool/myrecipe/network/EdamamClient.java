@@ -12,11 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.moringaschool.myrecipe.Constants.SPOONACULAR_API_KEY;
 import static com.moringaschool.myrecipe.Constants.SPOONACULAR_BASE_URL;
 
-public class SpoonacularClient {
+public class EdamamClient {
 
     private static Retrofit retrofit = null;
 
-    public static SpoonacularApi getClient() {
+    public static EdamamApi getClient() {
 
         if (retrofit == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -38,7 +38,7 @@ public class SpoonacularClient {
                     .build();
         }
 
-        return retrofit.create(SpoonacularApi.class);
+        return retrofit.create(EdamamApi.class);
     }
 
 }

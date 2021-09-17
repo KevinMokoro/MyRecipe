@@ -1,6 +1,7 @@
 package com.moringaschool.myrecipe.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.myrecipe.R;
-import com.moringaschool.myrecipe.models.SpoonacularRecipeSearchResponse;
-import com.moringaschool.myrecipe.models.UsedIngredient;
+import com.moringaschool.myrecipe.ui.RecipeDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class RecipeListAdapter  extends RecyclerView.Adapter<RecipeListAdapter.R
     public int getItemCount() {
         return mRecipe.size();
     }
-    public class RecipeViewHolder extends RecyclerView.ViewHolder {
+    public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.recipeImageView) ImageView mRecipeImageView;
         @BindView(R.id.recipeNameTextView) TextView mNameTextView;
         @BindView(R.id.sourceTextView) TextView mSourceTextView;
@@ -57,6 +59,7 @@ public class RecipeListAdapter  extends RecyclerView.Adapter<RecipeListAdapter.R
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindRecipe(UsedIngredient recipe) {
@@ -65,6 +68,15 @@ public class RecipeListAdapter  extends RecyclerView.Adapter<RecipeListAdapter.R
             mNameTextView.setText(recipe.getOriginalName());
             mSourceTextView.setText(recipe.getId());
             mLikesTextView.setText(SpoonacularRecipeSearchResponse.getTitle().getLikes() + "Likes");
+        }
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, RecipeDetailActivity.class);
+            intent.putExtra("position",itemPosition);
+            intent.putExtra("recipes", Parcels.wrap(mRecipes));
+            mContext.startActivity(intent);
+
         }
     }
 }

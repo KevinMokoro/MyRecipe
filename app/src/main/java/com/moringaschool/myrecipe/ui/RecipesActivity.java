@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.moringaschool.myrecipe.MyRecipesAdapter;
 import com.moringaschool.myrecipe.R;
 import com.moringaschool.myrecipe.adapters.RecipeListAdapter;
-import com.moringaschool.myrecipe.models.SpoonacularRecipeSearchResponse;
-import com.moringaschool.myrecipe.models.UsedIngredient;
-import com.moringaschool.myrecipe.network.SpoonacularApi;
-import com.moringaschool.myrecipe.network.SpoonacularClient;
+import com.moringaschool.myrecipe.network.EdamamApi;
+import com.moringaschool.myrecipe.network.EdamamClient;
 
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class RecipesActivity extends AppCompatActivity {
     private RecipeListAdapter mAdapter;
 
 
-  //  private Object SpoonacularRecipeSearchResponse;
+  //  private RecipeObject SpoonacularRecipeSearchResponse;
 
     //public List<Ingredient> recipes;
 
@@ -88,7 +86,7 @@ public class RecipesActivity extends AppCompatActivity {
         String ingredient = intent.getStringExtra("ingredient");
    //     mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
 
-        SpoonacularApi client = SpoonacularClient.getClient();
+        EdamamApi client = EdamamClient.getClient();
         Call<SpoonacularRecipeSearchResponse> call = client.getRecipes(ingredient);
 
         call.enqueue(new Callback<SpoonacularRecipeSearchResponse>() {
