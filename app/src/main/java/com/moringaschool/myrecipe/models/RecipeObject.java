@@ -1,4 +1,4 @@
-package com.moringaschool.myrecipe;
+package com.moringaschool.myrecipe.models;
 
 
 
@@ -67,7 +67,7 @@ public class RecipeObject {
         private String title;
     }
 
-    class Hits {
+  public class Hits {
         @Nullable
         @SerializedName("recipe")
         private Recipe recipe;
