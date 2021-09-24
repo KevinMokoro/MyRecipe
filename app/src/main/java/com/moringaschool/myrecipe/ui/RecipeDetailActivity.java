@@ -8,18 +8,20 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.moringaschool.myrecipe.R;
 import com.moringaschool.myrecipe.adapters.RecipePagerAdapter;
+import com.moringaschool.myrecipe.models.Hit;
 
 import org.parceler.Parcels;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeDetailActivity extends AppCompatActivity {
 
-    @BindView(R.id.viewPager)
-    ViewPager mViewPager;
+    @BindView(R.id.viewPager) ViewPager mViewPager;
     private RecipePagerAdapter adapterViewPager;
-    List<Recipe> mrecipes;
+    List<Hit> mRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
