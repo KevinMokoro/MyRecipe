@@ -53,10 +53,10 @@ public class RecipeListAdapter  extends RecyclerView.Adapter<RecipeListAdapter.R
     public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.recipeImageView) ImageView mRecipeImageView;
         @BindView(R.id.recipeNameTextView) TextView mNameTextView;
-      //  @BindView(R.id.sourceTextView) TextView mSourceTextView;
-     //   @BindView(R.id.likesTextView) TextView mLikesTextView;
+        @BindView(R.id.sourceTextView) TextView mSourceTextView;
+        @BindView(R.id.likesTextView) TextView mLikesTextView;
 
-    //    private Context mContext;
+        private Context mContext;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +70,8 @@ public class RecipeListAdapter  extends RecyclerView.Adapter<RecipeListAdapter.R
 
             Picasso.get().load(recipe.getRecipe().getImage()).into(mRecipeImageView);
             mNameTextView.setText(recipe.getRecipe().getLabel());
-       //     mSourceTextView.setText(recipe.getRecipe().getSource());
+            mSourceTextView.setText(recipe.getRecipe().getSource());
+          //  mLikesTextView.setText(recipe.getRecipe().getCalories());
         }
         @Override
         public void onClick(View v) {

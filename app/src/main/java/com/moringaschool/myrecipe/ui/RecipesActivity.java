@@ -31,7 +31,7 @@ import static com.moringaschool.myrecipe.Constants.EDAMAM_ID;
 
 public class RecipesActivity extends AppCompatActivity {
     private static final String TAG = RecipesActivity.class.getSimpleName();
-    @BindView(R.id.ingredientTextView) TextView mIngredientTextView;
+  //  @BindView(R.id.ingredientTextView) TextView mIngredientTextView;
   //  @BindView(R.id.listViewRecipes) ListView mListViewRecipes;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -83,7 +83,7 @@ public class RecipesActivity extends AppCompatActivity {
       //  });
         Intent intent = getIntent();
         String ingredient = intent.getStringExtra("ingredient");
-        mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
+     //   mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
 
         EdamamApi client = EdamamClient.getClient();
         Call<EdamamRecipeSearchResponse> call = client.getRecipes("public",ingredient,EDAMAM_ID, EDAMAM_API_KEY);
