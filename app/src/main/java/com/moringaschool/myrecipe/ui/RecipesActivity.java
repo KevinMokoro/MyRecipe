@@ -1,7 +1,8 @@
 package com.moringaschool.myrecipe.ui;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -11,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.moringaschool.myrecipe.models.EdamamRecipeSearchResponse;
-import com.moringaschool.myrecipe.models.Hit;
+import com.moringaschool.myrecipe.Constants;
 import com.moringaschool.myrecipe.R;
 import com.moringaschool.myrecipe.adapters.RecipeListAdapter;
+import com.moringaschool.myrecipe.models.EdamamRecipeSearchResponse;
+import com.moringaschool.myrecipe.models.Hit;
 import com.moringaschool.myrecipe.network.EdamamApi;
 import com.moringaschool.myrecipe.network.EdamamClient;
 
@@ -39,6 +41,8 @@ public class RecipesActivity extends AppCompatActivity {
 
     private RecipeListAdapter mAdapter;
     public List<Hit>  recipes;
+    private SharedPreferences mSharedPreferences;
+    private String mRecentRecipes;
 
 
     //public List<> recipes;
@@ -71,19 +75,16 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
 
-    //    MyRecipesAdapter adapter = new MyRecipesAdapter(this, android.R.layout.simple_list_item_1, recipes, sources);
-     //   mListViewRecipes.setAdapter(adapter);
 
-   //     mListViewRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-     //       @Override
-     //       public void onItemClick(AdapterView<?>parent, View view, int position, long l) {
-      //          String recipe = ((TextView)view).getText().toString();
-       //         Toast.makeText(RecipesActivity.this, recipe, Toast.LENGTH_LONG).show();
-       //     }
-      //  });
-        Intent intent = getIntent();
-        String ingredient = intent.getStringExtra("ingredient");
-     //   mIngredientTextView.setText("Ready Recipes That Match Your Ingredient: " + ingredient);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentRecipes = mSharedPreferences.getString(Constants.PREFERENCES_INGREDIENT_KEY, null);
+
+
+       // Intent intent = getIntent();
+      //  String ingredient = intent.getStringExtra("ingredient");
+
+        String ingredient = mRecentRecipes;
+
 
         EdamamApi client = EdamamClient.getClient();
         Call<EdamamRecipeSearchResponse> call = client.getRecipes("public",ingredient,EDAMAM_ID, EDAMAM_API_KEY);
