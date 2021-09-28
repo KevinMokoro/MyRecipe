@@ -8,6 +8,7 @@ public class Constants {
   //  public static final String RECIPE_QUERY_PARAMETER = "ingredient";
 
     public static final String PREFERENCES_INGREDIENT_KEY = "ingredient";
+    public static final String FIREBASE_CHILD_RECIPES = "recipes";
 
 }
 

@@ -8,10 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.moringaschool.myrecipe.Constants;
 import com.moringaschool.myrecipe.R;
 import com.moringaschool.myrecipe.models.Hit;
 import com.squareup.picasso.Picasso;
@@ -30,10 +34,7 @@ public class RecipeDetailFragment extends Fragment implements View.OnClickListen
 
     @BindView(R.id.recipeImageView) ImageView mImageLabel;
     @BindView(R.id.recipeNameTextView) TextView mNameLabel;
- //   @BindView(R.id.sourceTextView) TextView mSourceLabel;
- //   @BindView(R.id.likesTextView) TextView mLikesLabel;
     @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
-   // @BindView(R.id.addressTextView) TextView mAddressLabel;
     @BindView(R.id.saveRecipeButton) TextView mSaveRecipeButton;
 
 
@@ -67,29 +68,13 @@ public class RecipeDetailFragment extends Fragment implements View.OnClickListen
         ButterKnife.bind(this, view);
         Picasso.get().load(mRecipe.getRecipe().getImage()).into(mImageLabel);
 
-   //     List<String> categories = new ArrayList<>();
-    //    List<String> sources = new ArrayList<>();
-    //    String sources = mRecipe.getRecipe().getSource();
-    //    List<String> sources = new ArrayList<>();
 
-   //     for (RecipeObject.Hits source: mRecipe.getRecipe().getSource()) {
-     //       sources.add(source.getTitle());
-  //      }
-
-   //     for (Category category: mRestaurant.getCategories()) {
-    //        categories.add(category.getTitle());
-   //     }
 
         mNameLabel.setText(mRecipe.getRecipe().getLabel());
-    //    mSourceLabel.setText(android.text.TextUtils.join(", ", sources));
-     //   mLikesLabel.setText(Double.toString(mRestaurant.getRating()) + "/5");
-      //  mPhoneLabel.setText(mRestaurant.getPhone());
-      //  mAddressLabel.setText(mRestaurant.getLocation().toString());
 
         mWebsiteLabel.setOnClickListener(this);
-     //   mPhoneLabel.setOnClickListener(this);
-    //    mAddressLabel.setOnClickListener(this);
 
+        mSaveRecipeButton.setOnClickListener(this);
 
 
         return view;
@@ -101,17 +86,14 @@ public class RecipeDetailFragment extends Fragment implements View.OnClickListen
                     Uri.parse(mRecipe.getRecipe().getUrl()));
             startActivity(webIntent);
         }
-    //    if (v == mPhoneLabel) {
-    //        Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
-   //                 Uri.parse("tel:" + mRestaurant.getPhone()));
-    //        startActivity(phoneIntent);
-     //   }
-     //   if (v == mAddressLabel) {
-     //       Intent mapIntent = new Intent(Intent.ACTION_VIEW,
-     //               Uri.parse("geo:" + mRecipe.getCoordinates().getLatitude()
-     //                       + "," + mRecipe.getCoordinates().getLongitude()
-    //                        + "?q=(" + mRecipe.getName() + ")"));
-     //       startActivity(mapIntent);
+        if (v == mSaveRecipeButton) {
+            DatabaseReference recipeRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_RECIPES);
+            recipeRef.push().setValue(mRecipe);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+        }
+
         }
     }
 

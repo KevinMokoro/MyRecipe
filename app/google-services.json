@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "267201183007",
+    "project_id": "myrecipe-28d93",
+    "storage_bucket": "myrecipe-28d93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267201183007:android:40c91f1f9e34f7140dc42a",
+        "android_client_info": {
+          "package_name": "com.moringaschool.myrecipe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267201183007-5pfe7hg7uou6la3rded3ar3p29so0c0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moringaschool.myrecipe",
+            "certificate_hash": "d4948fafcc3091873013e796587fd262ed42861a"
+          }
+        },
+        {
+          "client_id": "267201183007-q014o2jh9agn4rlvmkq3gbenn3591p37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrf6Z6WpR5hIZ_EGXJEF1hQFXHmRn6Vtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267201183007-q014o2jh9agn4rlvmkq3gbenn3591p37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
