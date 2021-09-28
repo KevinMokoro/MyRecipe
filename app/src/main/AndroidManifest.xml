@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRecipe">
-        <activity android:name=".ui.SavedRecipeListActivity"></activity>
+        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.CreateAccountActivity" />
+        <activity android:name=".ui.SavedRecipeListActivity" />
         <activity android:name=".ui.RecipeDetailActivity" />
         <activity android:name=".ui.AboutActivity">
             <meta-data
