@@ -34,7 +34,7 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
         itemView.setOnClickListener(this);
     }
 
-    public void bindRestaurant(Hit recipe) {
+    public void bindRecipe(Hit recipe) {
         ImageView recipeImageView = (ImageView) mView.findViewById(R.id.recipeImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.recipeNameTextView);
 
