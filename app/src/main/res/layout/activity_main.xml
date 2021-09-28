@@ -45,25 +45,6 @@
         android:text="Find Ready Recipes"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/editTextIngredient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/findRecipe"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="-5dp"
-        android:background="@color/divider"
-        android:fontFamily="@font/roboto"
-        android:hint="Enter your ingredient"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textSize="22sp"
-        android:textStyle="bold" />
 
     <Button
         android:id="@+id/savedRecipesButton"
@@ -76,7 +57,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="174dp"
+        android:layout_marginBottom="108dp"
         android:background="@color/primary_dark"
         android:text="Saved Recipes"
         android:textColor="@color/icons"
