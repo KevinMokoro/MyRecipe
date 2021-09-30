@@ -1,6 +1,7 @@
 package com.moringaschool.myrecipe.adapters;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
@@ -18,10 +19,15 @@ public class RecipePagerAdapter extends FragmentPagerAdapter {
         mRecipes = recipes;
     }
 
-    @Override
-    public RecipeDetailFragment getItem(int position) {
+
+
+
+        @Override
+    public Fragment getItem(int position) {
         return RecipeDetailFragment.newInstance(mRecipes.get(position));
     }
+
+
 
     @Override
     public int getCount (){

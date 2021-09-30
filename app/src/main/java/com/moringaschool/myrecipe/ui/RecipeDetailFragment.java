@@ -27,11 +27,6 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecipeDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class RecipeDetailFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.recipeImageView) ImageView mImageLabel;
@@ -69,8 +64,6 @@ public class RecipeDetailFragment extends Fragment implements View.OnClickListen
         View view =  inflater.inflate(R.layout.fragment_recipe_detail, container, false);
         ButterKnife.bind(this, view);
         Picasso.get().load(mRecipe.getRecipe().getImage()).into(mImageLabel);
-
-
 
         mNameLabel.setText(mRecipe.getRecipe().getLabel());
 

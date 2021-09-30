@@ -37,8 +37,7 @@ import static com.moringaschool.myrecipe.Constants.EDAMAM_ID;
 
 public class RecipesActivity extends AppCompatActivity {
     private static final String TAG = RecipesActivity.class.getSimpleName();
-  //  @BindView(R.id.ingredientTextView) TextView mIngredientTextView;
-  //  @BindView(R.id.listViewRecipes) ListView mListViewRecipes;
+
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;

@@ -19,6 +19,8 @@ public class Hit {
 
     private String pushId;
 
+    String index;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -35,6 +37,7 @@ public class Hit {
         super();
         this.recipe = recipe;
         this.links = links;
+        this.index = "not_specified";
     }
 
     public Recipe getRecipe() {
@@ -59,6 +62,14 @@ public class Hit {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 }
