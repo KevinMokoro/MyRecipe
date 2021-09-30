@@ -1,18 +1,15 @@
 package com.moringaschool.myrecipe.ui;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,15 +17,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.myrecipe.Constants;
 import com.moringaschool.myrecipe.R;
-import com.moringaschool.myrecipe.adapters.FirebaseRecipeViewHolder;
+import com.moringaschool.myrecipe.adapters.FirebaseRecipeListAdapter;
 import com.moringaschool.myrecipe.models.Hit;
+import com.moringaschool.myrecipe.util.OnStartDragListener;
+import com.moringaschool.myrecipe.util.SimpleItemTouchHelperCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SavedRecipeListActivity extends AppCompatActivity {
     private DatabaseReference mRecipeReference;
-    private FirebaseRecyclerAdapter<Hit, FirebaseRecipeViewHolder> mFirebaseAdapter;
+   // private FirebaseRecyclerAdapter<Hit, FirebaseRecipeViewHolder> mFirebaseAdapter;
+   private FirebaseRecipeListAdapter mFirebaseAdapter;
+   private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -43,41 +44,32 @@ public class SavedRecipeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         ButterKnife.bind(this);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
 
-        mRecipeReference = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RECIPES)
-                .child(uid);
         setUpFirebaseAdapter();
         hideProgressBar();
         showRecipes();
     }
 
+
     private void setUpFirebaseAdapter(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        mRecipeReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RECIPES).child(uid);
         FirebaseRecyclerOptions<Hit> options =
                 new FirebaseRecyclerOptions.Builder<Hit>()
                         .setQuery(mRecipeReference, Hit.class)
                         .build();
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Hit, FirebaseRecipeViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull FirebaseRecipeViewHolder firebaseRecipeViewHolder, int position, @NonNull Hit recipe) {
-                firebaseRecipeViewHolder.bindRecipe(recipe);
-            }
-
-            @NonNull
-            @Override
-            public FirebaseRecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_item, parent, false);
-                return new FirebaseRecipeViewHolder(view);
-            }
-        };
+        mFirebaseAdapter = new FirebaseRecipeListAdapter(options, mRecipeReference, (OnStartDragListener) this, this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
+        mRecyclerView.setHasFixedSize(true);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
+
 
     @Override
     protected void onStart() {
@@ -91,6 +83,10 @@ public class SavedRecipeListActivity extends AppCompatActivity {
         if(mFirebaseAdapter!= null) {
             mFirebaseAdapter.stopListening();
         }
+    }
+
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder){
+        mItemTouchHelper.startDrag(viewHolder);
     }
 
     private void showRecipes() {

@@ -29,6 +29,8 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     View mView;
     Context mContext;
 
+    public ImageView mRecipeImageView;
+
     public FirebaseRecipeViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
@@ -37,10 +39,10 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     }
 
     public void bindRecipe(Hit recipe) {
-        ImageView recipeImageView = (ImageView) mView.findViewById(R.id.recipeImageView);
+        mRecipeImageView = (ImageView) mView.findViewById(R.id.recipeImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.recipeNameTextView);
 
-        Picasso.get().load(recipe.getRecipe().getImage()).into(recipeImageView);
+        Picasso.get().load(recipe.getRecipe().getImage()).into(mRecipeImageView);
 
         nameTextView.setText(recipe.getRecipe().getLabel());
     }
