@@ -82,6 +82,8 @@ public class RecipesActivity extends AppCompatActivity {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentRecipes = mSharedPreferences.getString(Constants.PREFERENCES_INGREDIENT_KEY, null);
 
+
+
      //   String ingredient = mRecentRecipes;
         if(mRecentRecipes != null){
             fetchRecipes(mRecentRecipes);

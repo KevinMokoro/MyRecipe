@@ -66,6 +66,8 @@ public class Recipe {
     @Expose
     private List<Digest> digest = null;
 
+    private String pushId;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -262,5 +264,14 @@ public class Recipe {
     public void setDigest(List<Digest> digest) {
         this.digest = digest;
     }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
 
 }
