@@ -32,8 +32,8 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
    private FirebaseRecipeListAdapter mFirebaseAdapter;
    private ItemTouchHelper mItemTouchHelper;
 
-    @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+
     @BindView(R.id.errorTextView)
     TextView mErrorTextView;
     @BindView(R.id.progressBar)

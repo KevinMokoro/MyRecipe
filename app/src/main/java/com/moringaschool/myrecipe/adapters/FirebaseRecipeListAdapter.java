@@ -122,13 +122,6 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
     }
 
 
-    @Override
-    public void onItemDismiss(int position){
-        mRecipes.remove(position);
-        getRef(position).removeValue();
-    }
-
-
 
     private void setIndexInFirebase() {
         for (Hit recipe : mRecipes) {
@@ -138,6 +131,13 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
             mReference.setValue(recipe);
         }
     }
+
+    @Override
+    public void onItemDismiss(int position){
+        mRecipes.remove(position);
+        getRef(position).removeValue();
+    }
+
 
 
 

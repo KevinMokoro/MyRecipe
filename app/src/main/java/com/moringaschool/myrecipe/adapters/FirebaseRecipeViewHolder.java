@@ -29,13 +29,13 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder {
     public void bindRecipe(Hit recipe) {
         mRecipeImageView = mView.findViewById(R.id.recipeImageView);
         TextView nameTextView = mView.findViewById(R.id.recipeNameTextView);
-      //  TextView sourceTextView = mView.findViewById(R.id.sourceNameTextView);
+        TextView sourceTextView = mView.findViewById(R.id.sourceNameTextView);
 
         Picasso.get().load(recipe.getRecipe().getImage()).into(mRecipeImageView);
 
         nameTextView.setText(recipe.getRecipe().getLabel());
 
-        //sourceTextView.setText(recipe.getRecipe().getSource());
+        sourceTextView.setText(recipe.getRecipe().getSource());
 
     }
 
