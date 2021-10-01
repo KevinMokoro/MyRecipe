@@ -43,6 +43,7 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
+
         ButterKnife.bind(this);
 
 
@@ -62,7 +63,7 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
         FirebaseRecyclerOptions<Hit> options =
                 new FirebaseRecyclerOptions.Builder<Hit>().setQuery(query, Hit.class).build();
 
-        mFirebaseAdapter = new FirebaseRecipeListAdapter(options, query,  this,this);
+        mFirebaseAdapter = new FirebaseRecipeListAdapter(options, query,   this,this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);

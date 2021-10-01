@@ -1,5 +1,7 @@
 package com.moringaschool.myrecipe.adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.myrecipe.R;
 import com.moringaschool.myrecipe.models.Hit;
+import com.moringaschool.myrecipe.util.ItemTouchHelperViewHolder;
 import com.squareup.picasso.Picasso;
 
-public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder {
+public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
     View mView;
     Context mContext;
 
@@ -37,6 +40,25 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder {
 
         sourceTextView.setText(recipe.getRecipe().getSource());
 
+    }
+
+
+
+
+    @Override
+    public void onItemSelected() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,
+               R.animator.drag_scale_on);
+       set.setTarget(itemView);
+       set.start();
+   }
+
+    @Override
+    public void onItemClear() {
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,
+                R.animator.drag_scale_off);
+        set.setTarget(itemView);
+        set.start();
     }
 
 }
