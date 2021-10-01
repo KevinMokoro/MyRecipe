@@ -38,10 +38,7 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
 
 
 
-    public FirebaseRecipeListAdapter (FirebaseRecyclerOptions<Hit> options,
-                                      Query ref,
-                                      OnStartDragListener onStartDragListener,
-                                      Context context) {
+    public FirebaseRecipeListAdapter (FirebaseRecyclerOptions<Hit> options, Query ref, OnStartDragListener onStartDragListener, Context context) {
         super(options);
         mRef = ref.getRef();
         mOnStartDragListener = onStartDragListener;
@@ -93,7 +90,7 @@ public class FirebaseRecipeListAdapter extends FirebaseRecyclerAdapter<Hit, Fire
         });
 
 
-           firebaseRecipeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        firebaseRecipeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(mContext, RecipeDetailActivity.class);

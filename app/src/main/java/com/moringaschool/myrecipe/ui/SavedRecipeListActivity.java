@@ -48,6 +48,7 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
 
 
         setUpFirebaseAdapter();
+
         hideProgressBar();
         showRecipes();
 
@@ -64,9 +65,9 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
                 new FirebaseRecyclerOptions.Builder<Hit>().setQuery(query, Hit.class).build();
 
         mFirebaseAdapter = new FirebaseRecipeListAdapter(options, query,   this,this);
+        mRecyclerView.setAdapter(mFirebaseAdapter);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
         mRecyclerView.setHasFixedSize(true);
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
